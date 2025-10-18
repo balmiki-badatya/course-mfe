@@ -1,0 +1,44 @@
+<aside class="sidebar" [class.collapsed]="!isExpanded">
+  <div class="sidebar-header">
+    <button class="toggle-btn" (click)="toggleSidebar()" [title]="isExpanded ? 'Collapse sidebar' : 'Expand sidebar'">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <line x1="3" y1="12" x2="21" y2="12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <line x1="3" y1="6" x2="21" y2="6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <line x1="3" y1="18" x2="21" y2="18" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+    <h3 class="sidebar-title" *ngIf="isExpanded">Menu</h3>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="nav-section">
+      <h3 class="nav-section-title" *ngIf="isExpanded">Navigation</h3>
+      <ul class="nav-list">
+        <li *ngFor="let item of menuItems; let i = index">
+          <a
+            [routerLink]="item.route"
+            routerLinkActive="active"
+            class="nav-item"
+            [title]="!isExpanded ? item.label : ''"
+            (click)="setActive(i)">
+            <svg *ngIf="item.icon === 'dashboard'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <rect x="3" y="3" width="7" height="7" rx="1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <rect x="14" y="3" width="7" height="7" rx="1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <rect x="14" y="14" width="7" height="7" rx="1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <rect x="3" y="14" width="7" height="7" rx="1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <svg *ngIf="item.icon === 'labs'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M9 2v6.5L4 14v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6l-5-5.5V2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M9 2h6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <svg *ngIf="item.icon === 'resources'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="nav-label" *ngIf="isExpanded">{{ item.label }}</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</aside>
