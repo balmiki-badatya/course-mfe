@@ -1,0 +1,55 @@
+name: 'Pull Request action'
+
+on:
+  pull_request:
+    branches: [ main ]
+jobs:
+  Build:
+    name: 'Build'
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@v5
+      - name: 'Install Node'
+        uses: actions/setup-node@v6
+        with:
+          node-version: 18.19.1
+      - name: 'Install angular'
+        run: |
+           npm i -g @angular/cli@19.2.18
+           ng version
+      - name: 'Build my-programs-mfe'
+        run: |
+          npm install
+          ng build
+      - name: 'Upload Artifact'
+        uses: actions/upload-artifact@v4
+        with:
+          name: my-programs-build-artifact
+          path: .
+  Test:
+    name: 'Unit Testing'
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Setup environement'
+        uses: actions/setup-node
+        with:
+          node-version: 18.19.1
+      - name: 'Setup angular'
+        run: |
+          npm install -g @angular/cli@19.2.18
+          ng version
+      - name: 'Download Build artifacts'
+        uses: actions/download-artifact@v5
+        with:
+           name: my-programs-build-artifact
+      - name: 'Unit Testing'
+        run: |
+          ng test
+      - name: 'Linting'
+        run: ng lint
+
+
+
+
+
