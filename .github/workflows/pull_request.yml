@@ -32,7 +32,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 'Setup environement'
-        uses: actions/setup-node
+        uses: actions/setup-node@v6
         with:
           node-version: 18.19.1
       - name: 'Setup angular'
