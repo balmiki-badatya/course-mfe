@@ -3,6 +3,8 @@ name: 'Pull Request action'
 on:
   pull_request:
     branches: [ main ]
+    paths-ignore:
+      - README.md
 jobs:
   Build:
     name: 'Build'

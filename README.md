@@ -1,4 +1,4 @@
-# My Programs MFE
+# Course MFE
 
 A micro-frontend application for managing and displaying programming topics and resources, built with Angular 19.2.
 
