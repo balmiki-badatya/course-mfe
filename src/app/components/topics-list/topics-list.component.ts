@@ -159,18 +159,23 @@ export class TopicsListComponent implements OnInit {
   }
 
   getPageNumbers(): (number | string)[] {
-    if (this.totalPages <= 5) {
+    const maxVisible = 5;
+
+    if (this.totalPages <= maxVisible) {
       return Array.from({ length: this.totalPages }, (_, i) => i + 1);
     }
 
-    const pages: (number | string)[] = [];
+    const pages: number[] = [];
+    let startPage = Math.max(1, this.currentPage - Math.floor(maxVisible / 2));
+    const endPage = Math.min(this.totalPages, startPage + maxVisible - 1);
 
-    if (this.currentPage <= 3) {
-      pages.push(1, 2, 3, '...', this.totalPages);
-    } else if (this.currentPage >= this.totalPages - 2) {
-      pages.push(1, '...', this.totalPages - 2, this.totalPages - 1, this.totalPages);
-    } else {
-      pages.push(1, '...', this.currentPage, '...', this.totalPages);
+    // Adjust start if we're near the end
+    if (endPage - startPage < maxVisible - 1) {
+      startPage = Math.max(1, endPage - maxVisible + 1);
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+      pages.push(i);
     }
 
     return pages;

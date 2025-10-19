@@ -18,10 +18,11 @@ jobs:
         run: |
            npm i -g @angular/cli@19.2.18
            ng version
+           npm install -g yarn
       - name: 'Build my-programs-mfe'
         run: |
-          npm install
-          ng build
+          yarn install
+          yarn build
       - name: 'Upload Artifact'
         uses: actions/upload-artifact@v4
         with:
@@ -41,8 +42,6 @@ jobs:
           npm install -g @angular/cli@19.2.18
           ng version
           npm install -g yarn
-          rm yarn.lock
-          yarn
       - name: 'Download Build artifacts'
         uses: actions/download-artifact@v5
         with:

@@ -180,16 +180,13 @@
         </button>
 
         <div class="page-numbers">
-          <ng-container *ngFor="let page of getPageNumbers()">
-            <button
-              *ngIf="page !== '...'"
-              class="page-number-btn"
-              [class.active]="page === currentPage"
-              (click)="goToPage(page)">
-              {{ page }}
-            </button>
-            <span *ngIf="page === '...'" class="page-ellipsis">...</span>
-          </ng-container>
+          <button
+            *ngFor="let page of getPageNumbers()"
+            class="page-number-btn"
+            [class.active]="page === currentPage"
+            (click)="goToPage(page)">
+            {{ page }}
+          </button>
         </div>
 
         <button
