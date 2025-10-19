@@ -20,15 +20,15 @@ export class SidebarComponent {
       active: true
     },
     {
-      icon: 'labs',
-      label: 'Labs',
-      route: '/labs',
-      active: false
-    },
-    {
       icon: 'resources',
       label: 'Resources',
       route: '/resources',
+      active: false
+    },
+    {
+      icon: 'labs',
+      label: 'Labs',
+      route: '/labs',
       active: false
     }
   ];
