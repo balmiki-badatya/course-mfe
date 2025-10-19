@@ -13,7 +13,7 @@ jobs:
       - name: 'Install Node'
         uses: actions/setup-node@v6
         with:
-          node-version: 18.19.1
+          node-version: 20.19.5
       - name: 'Install angular'
         run: |
            npm i -g @angular/cli@19.2.18
@@ -35,16 +35,14 @@ jobs:
       - name: 'Setup environement'
         uses: actions/setup-node@v6
         with:
-          node-version: 18.19.1
-      - name: 'Setup angular'
+          node-version: 20.19.5
+      - name: 'Setup angular & yarn'
         run: |
           npm install -g @angular/cli@19.2.18
           ng version
-          curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-          echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-          sudo apt update && sudo apt install yarn
-          yarn --version
-          rm -rf yarn.lock
+          npm install -g yarn
+          rm yarn.lock
+          yarn
       - name: 'Download Build artifacts'
         uses: actions/download-artifact@v5
         with:
