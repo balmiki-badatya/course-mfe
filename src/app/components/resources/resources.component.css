@@ -1,0 +1,171 @@
+.resources-page {
+  background: linear-gradient(to bottom, #fef3f2, #ffffff);
+  padding: 2rem 2rem;
+}
+
+.content-wrapper {
+  max-width: 700px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.header-section {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.icon-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  border-radius: 20px;
+  margin-bottom: 1rem;
+  box-shadow: 0 8px 24px rgba(245, 87, 108, 0.25);
+}
+
+.icon-wrapper svg {
+  color: white;
+}
+
+.page-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1a202c;
+  margin: 0 0 0.5rem 0;
+  letter-spacing: -0.5px;
+}
+
+.page-subtitle {
+  font-size: 1rem;
+  color: #64748b;
+  margin: 0;
+  font-weight: 400;
+}
+
+.card-container {
+  display: flex;
+  justify-content: center;
+}
+
+.info-card {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 10px 15px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  border: 1px solid #e2e8f0;
+}
+
+.card-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  background: #fef2f2;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+}
+
+.card-icon svg {
+  color: #f5576c;
+}
+
+.info-card h2 {
+  font-size: 1.375rem;
+  font-weight: 600;
+  color: #1a202c;
+  margin: 0 0 0.75rem 0;
+}
+
+.info-card > p {
+  font-size: 0.95rem;
+  color: #64748b;
+  line-height: 1.6;
+  margin: 0 0 1.5rem 0;
+}
+
+.feature-list {
+  margin: 1.5rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.625rem 0.875rem;
+  background: #fef9f9;
+  border-radius: 8px;
+  border-left: 3px solid #f5576c;
+}
+
+.feature-item svg {
+  color: #f5576c;
+  flex-shrink: 0;
+}
+
+.feature-item span {
+  font-size: 0.875rem;
+  color: #334155;
+  font-weight: 500;
+}
+
+.update-message {
+  margin-top: 1.5rem;
+  padding: 0.875rem 1.25rem;
+  background: linear-gradient(135deg, #f093fb15 0%, #f5576c15 100%);
+  border-radius: 8px;
+  text-align: center;
+  font-size: 0.938rem;
+  color: #f5576c;
+  font-weight: 600;
+  border: 1px solid #f5576c30;
+}
+
+@media (max-width: 768px) {
+  .resources-page {
+    padding: 2rem 1rem;
+  }
+
+  .page-title {
+    font-size: 2rem;
+  }
+
+  .page-subtitle {
+    font-size: 1rem;
+  }
+
+  .info-card {
+    padding: 1.5rem;
+  }
+
+  .icon-wrapper {
+    width: 80px;
+    height: 80px;
+  }
+
+  .icon-wrapper svg {
+    width: 48px;
+    height: 48px;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-title {
+    font-size: 1.75rem;
+  }
+
+  .feature-item {
+    padding: 0.625rem 0.875rem;
+  }
+
+  .feature-item span {
+    font-size: 0.875rem;
+  }
+}

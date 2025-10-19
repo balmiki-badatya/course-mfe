@@ -1,0 +1,58 @@
+name: 'Pull Request action'
+
+on:
+  pull_request:
+    branches: [ main ]
+jobs:
+  Build:
+    name: 'Build'
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@v5
+      - name: 'Install Node'
+        uses: actions/setup-node@v6
+        with:
+          node-version: 20.19.5
+      - name: 'Install angular'
+        run: |
+           npm i -g @angular/cli@19.2.18
+           ng version
+           npm install -g yarn
+      - name: 'Build my-programs-mfe'
+        run: |
+          yarn install
+          yarn build
+      - name: 'Upload Artifact'
+        uses: actions/upload-artifact@v4
+        with:
+          name: my-programs-build-artifact
+          path: .
+  Test:
+    name: 'Unit Testing'
+    runs-on: ubuntu-latest
+    needs: [Build]
+    steps:
+      - name: 'Setup environement'
+        uses: actions/setup-node@v6
+        with:
+          node-version: 20.19.5
+      - name: 'Setup angular & yarn'
+        run: |
+          npm install -g @angular/cli@19.2.18
+          ng version
+          npm install -g yarn
+      - name: 'Download Build artifacts'
+        uses: actions/download-artifact@v5
+        with:
+           name: my-programs-build-artifact
+      - name: 'Unit Testing'
+        run: |
+          yarn test
+      - name: 'Linting'
+        run: yarn lint
+
+
+
+
+

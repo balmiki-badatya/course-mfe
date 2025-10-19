@@ -1,0 +1,35 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: #f9fafb;
+  overflow: hidden;
+}
+
+.main-container {
+  display: flex;
+  flex: 1;
+  margin-top: 64px;
+  overflow: hidden;
+}
+
+.content-area {
+  flex: 1;
+  overflow-y: auto;
+  background: #f9fafb;
+  height: calc(100vh - 64px);
+  margin-left: 260px;
+  transition: margin-left 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .main-container {
+    flex-direction: column;
+    margin-top: 64px;
+  }
+
+  .content-area {
+    margin-left: 0;
+    height: auto;
+  }
+}
