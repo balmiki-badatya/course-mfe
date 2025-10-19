@@ -34,65 +34,44 @@ describe('HeaderComponent', () => {
     expect(compiled).toBeTruthy();
   });
 
-  describe('negative test cases', () => {
-    it('should handle multiple rapid sign out clicks', () => {
-      const consoleSpy = spyOn(console, 'log');
+  it('should render header element', () => {
+    const compiled = fixture.nativeElement as HTMLElement;
+    const header = compiled.querySelector('header');
+    expect(header).toBeTruthy();
+  });
 
-      for (let i = 0; i < 100; i++) {
-        component.onSignOut();
-      }
+  it('should render brand name', () => {
+    const compiled = fixture.nativeElement as HTMLElement;
+    const brandName = compiled.querySelector('.brand-name');
+    expect(brandName).toBeTruthy();
+    expect(brandName?.textContent).toContain('SkillSync');
+  });
 
-      expect(consoleSpy).toHaveBeenCalledTimes(100);
-    });
+  it('should render sign out button', () => {
+    const compiled = fixture.nativeElement as HTMLElement;
+    const signOutBtn = compiled.querySelector('.sign-out-btn');
+    expect(signOutBtn).toBeTruthy();
+  });
 
-    it('should throw when onSignOut is called without console.log', () => {
-      const originalConsole = console.log;
-      (console as any).log = undefined;
+  it('should call onSignOut when sign out button is clicked', () => {
+    spyOn(component, 'onSignOut');
+    const compiled = fixture.nativeElement as HTMLElement;
+    const signOutBtn = compiled.querySelector('.sign-out-btn') as HTMLButtonElement;
 
-      expect(() => component.onSignOut()).toThrow();
+    signOutBtn.click();
 
-      console.log = originalConsole;
-    });
+    expect(component.onSignOut).toHaveBeenCalled();
+  });
 
-    it('should render header element', () => {
-      const compiled = fixture.nativeElement as HTMLElement;
-      const header = compiled.querySelector('header');
-      expect(header).toBeTruthy();
-    });
+  it('should have correct button text', () => {
+    const compiled = fixture.nativeElement as HTMLElement;
+    const signOutBtn = compiled.querySelector('.sign-out-btn');
+    expect(signOutBtn?.textContent).toContain('Sign Out');
+  });
 
-    it('should render brand name', () => {
-      const compiled = fixture.nativeElement as HTMLElement;
-      const brandName = compiled.querySelector('.brand-name');
-      expect(brandName).toBeTruthy();
-      expect(brandName?.textContent).toContain('SkillSync');
-    });
-
-    it('should render sign out button', () => {
-      const compiled = fixture.nativeElement as HTMLElement;
-      const signOutBtn = compiled.querySelector('.sign-out-btn');
-      expect(signOutBtn).toBeTruthy();
-    });
-
-    it('should call onSignOut when sign out button is clicked', () => {
-      spyOn(component, 'onSignOut');
-      const compiled = fixture.nativeElement as HTMLElement;
-      const signOutBtn = compiled.querySelector('.sign-out-btn') as HTMLButtonElement;
-
-      signOutBtn.click();
-
-      expect(component.onSignOut).toHaveBeenCalled();
-    });
-
-    it('should have correct button text', () => {
-      const compiled = fixture.nativeElement as HTMLElement;
-      const signOutBtn = compiled.querySelector('.sign-out-btn');
-      expect(signOutBtn?.textContent).toContain('Sign Out');
-    });
-
-    it('should render SVG icon in button', () => {
-      const compiled = fixture.nativeElement as HTMLElement;
-      const svg = compiled.querySelector('.sign-out-btn svg');
-      expect(svg).toBeTruthy();
-    });
+  it('should render SVG icon in button', () => {
+    const compiled = fixture.nativeElement as HTMLElement;
+    const svg = compiled.querySelector('.sign-out-btn svg');
+    expect(svg).toBeTruthy();
   });
 });

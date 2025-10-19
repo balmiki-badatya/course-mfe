@@ -1,4 +1,4 @@
-import { Injectable, PLATFORM_ID, Inject } from '@angular/core';
+import { Injectable, PLATFORM_ID, inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Topic } from '../models/topic.model';
@@ -7,10 +7,9 @@ import { Topic } from '../models/topic.model';
   providedIn: 'root'
 })
 export class TopicsService {
+  private platformId = inject(PLATFORM_ID);
   private topicsSubject = new BehaviorSubject<Topic[]>(this.getInitialTopics());
   public topics$: Observable<Topic[]> = this.topicsSubject.asObservable();
-
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
   private getInitialTopics(): Topic[] {
     if (isPlatformBrowser(this.platformId)) {

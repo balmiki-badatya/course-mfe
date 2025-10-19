@@ -1,18 +1,26 @@
 <aside class="sidebar" [class.collapsed]="!isExpanded">
   <div class="sidebar-header">
-    <button class="toggle-btn" (click)="toggleSidebar()" [title]="isExpanded ? 'Collapse sidebar' : 'Expand sidebar'">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-        <line x1="3" y1="12" x2="21" y2="12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        <line x1="3" y1="6" x2="21" y2="6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        <line x1="3" y1="18" x2="21" y2="18" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </button>
-    <h3 class="sidebar-title" *ngIf="isExpanded">Menu</h3>
+    <div class="header-top">
+      <button class="toggle-btn" (click)="toggleSidebar()" [title]="isExpanded ? 'Collapse sidebar' : 'Expand sidebar'">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <line x1="3" y1="12" x2="21" y2="12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <line x1="3" y1="6" x2="21" y2="6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <line x1="3" y1="18" x2="21" y2="18" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+    <div class="profile-container" *ngIf="isExpanded">
+      <div class="profile-icon" title="Add profile image">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
+      </div>
+    </div>
   </div>
 
   <nav class="sidebar-nav">
     <div class="nav-section">
-      <h3 class="nav-section-title" *ngIf="isExpanded">Navigation</h3>
       <ul class="nav-list">
         <li *ngFor="let item of menuItems; let i = index">
           <a

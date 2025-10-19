@@ -500,7 +500,6 @@
   align-items: center;
   gap: 1rem;
   padding: 1.5rem;
-  border-top: 1px solid #e5e7eb;
 }
 
 .page-btn {
@@ -551,6 +550,17 @@
   background: #2563eb;
   color: #ffffff;
   border-color: #2563eb;
+}
+
+.page-ellipsis {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  color: #9ca3af;
+  font-weight: 600;
+  user-select: none;
 }
 
 @media (max-width: 768px) {
@@ -631,4 +641,38 @@
     height: 36px;
     font-size: 0.85rem;
   }
+
+  .pagination-wrapper {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .topics-counter {
+    justify-content: center;
+  }
+
+  .topics-counter span {
+    font-size: 0.875rem;
+  }
+}
+
+.pagination-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 1.5rem 0.75rem;
+}
+
+.topics-counter {
+  display: flex;
+  align-items: center;
+}
+
+.topics-counter span {
+  font-size: 0.938rem;
+  font-weight: 600;
+  color: #6b7280;
+  white-space: nowrap;
 }

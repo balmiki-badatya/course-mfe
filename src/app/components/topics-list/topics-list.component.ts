@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TopicsService } from '../../services/topics.service';
@@ -12,6 +12,8 @@ import { Topic } from '../../models/topic.model';
   styleUrls: ['../../../styles/topics-list.styles.css']
 })
 export class TopicsListComponent implements OnInit {
+  private topicsService = inject(TopicsService);
+
   topics: Topic[] = [];
   paginatedTopics: Topic[] = [];
   currentPage = 1;
@@ -19,11 +21,9 @@ export class TopicsListComponent implements OnInit {
   totalPages = 1;
   isAddingTopic = false;
   newTopicName = '';
-  editingSubtopics: { [key: string]: string } = {};
+  editingSubtopics: Record<string, string> = {};
   addingSubtopicFor: string | null = null;
   newSubtopicName = '';
-
-  constructor(private topicsService: TopicsService) {}
 
   ngOnInit(): void {
     this.topicsService.topics$.subscribe(topics => {
@@ -44,7 +44,7 @@ export class TopicsListComponent implements OnInit {
     this.paginatedTopics = this.topics.slice(startIndex, endIndex);
   }
 
-  toggleComplete(topicId: string, isParent: boolean = false): void {
+  toggleComplete(topicId: string, isParent = false): void {
     if (isParent) {
       this.topicsService.toggleCompleteWithChildren(topicId);
     } else {
@@ -132,9 +132,11 @@ export class TopicsListComponent implements OnInit {
     }
   }
 
-  goToPage(page: number): void {
-    this.currentPage = page;
-    this.updatePagination();
+  goToPage(page: number | string): void {
+    if (typeof page === 'number') {
+      this.currentPage = page;
+      this.updatePagination();
+    }
   }
 
   previousPage(): void {
@@ -156,8 +158,22 @@ export class TopicsListComponent implements OnInit {
     this.updatePagination();
   }
 
-  getPageNumbers(): number[] {
-    return Array.from({ length: this.totalPages }, (_, i) => i + 1);
+  getPageNumbers(): (number | string)[] {
+    if (this.totalPages <= 5) {
+      return Array.from({ length: this.totalPages }, (_, i) => i + 1);
+    }
+
+    const pages: (number | string)[] = [];
+
+    if (this.currentPage <= 3) {
+      pages.push(1, 2, 3, '...', this.totalPages);
+    } else if (this.currentPage >= this.totalPages - 2) {
+      pages.push(1, '...', this.totalPages - 2, this.totalPages - 1, this.totalPages);
+    } else {
+      pages.push(1, '...', this.currentPage, '...', this.totalPages);
+    }
+
+    return pages;
   }
 
   getCompletionPercentage(): number {

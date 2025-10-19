@@ -1,5 +1,7 @@
 import { Routes } from '@angular/router';
 import { TopicsListComponent } from './components/topics-list/topics-list.component';
+import { LabsComponent } from './components/labs/labs.component';
+import { ResourcesComponent } from './components/resources/resources.component';
 
 export const routes: Routes = [
   {
@@ -13,11 +15,11 @@ export const routes: Routes = [
   },
   {
     path: 'labs',
-    component: TopicsListComponent
+    component: LabsComponent
   },
   {
     path: 'resources',
-    component: TopicsListComponent
+    component: ResourcesComponent
   },
   {
     path: '**',

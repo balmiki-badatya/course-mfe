@@ -135,8 +135,7 @@
                 placeholder="Enter subtopic name..."
                 class="new-subtopic-input"
                 (keyup.enter)="saveNewSubtopic()"
-                (keyup.escape)="cancelAddingSubtopic()"
-                autofocus>
+                (keyup.escape)="cancelAddingSubtopic()">
               <div class="form-actions">
                 <button class="save-btn" (click)="saveNewSubtopic()">Save</button>
                 <button class="cancel-btn" (click)="cancelAddingSubtopic()">Cancel</button>
@@ -171,30 +170,39 @@
       </div>
     </div>
 
-    <div class="pagination" *ngIf="totalPages > 1">
-      <button
-        class="page-btn"
-        [disabled]="currentPage === 1"
-        (click)="previousPage()">
-        Previous
-      </button>
-
-      <div class="page-numbers">
+    <div class="pagination-wrapper">
+      <div class="pagination" *ngIf="totalPages > 1">
         <button
-          *ngFor="let page of getPageNumbers()"
-          class="page-number-btn"
-          [class.active]="page === currentPage"
-          (click)="goToPage(page)">
-          {{ page }}
+          class="page-btn"
+          [disabled]="currentPage === 1"
+          (click)="previousPage()">
+          Previous
+        </button>
+
+        <div class="page-numbers">
+          <ng-container *ngFor="let page of getPageNumbers()">
+            <button
+              *ngIf="page !== '...'"
+              class="page-number-btn"
+              [class.active]="page === currentPage"
+              (click)="goToPage(page)">
+              {{ page }}
+            </button>
+            <span *ngIf="page === '...'" class="page-ellipsis">...</span>
+          </ng-container>
+        </div>
+
+        <button
+          class="page-btn"
+          [disabled]="currentPage === totalPages"
+          (click)="nextPage()">
+          Next
         </button>
       </div>
 
-      <button
-        class="page-btn"
-        [disabled]="currentPage === totalPages"
-        (click)="nextPage()">
-        Next
-      </button>
+      <div class="topics-counter">
+        <span>{{ topics.length }} Topics</span>
+      </div>
     </div>
   </div>
 </div>
