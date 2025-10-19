@@ -28,8 +28,8 @@ describe('SidebarComponent', () => {
     it('should initialize with correct menu items', () => {
       expect(component.menuItems.length).toBe(3);
       expect(component.menuItems[0].label).toBe('Programs');
-      expect(component.menuItems[1].label).toBe('Labs');
-      expect(component.menuItems[2].label).toBe('Resources');
+      expect(component.menuItems[1].label).toBe('Resources');
+      expect(component.menuItems[2].label).toBe('Labs');
     });
 
     it('should have Programs as active by default', () => {
@@ -40,14 +40,14 @@ describe('SidebarComponent', () => {
 
     it('should have correct routes for menu items', () => {
       expect(component.menuItems[0].route).toBe('/programs');
-      expect(component.menuItems[1].route).toBe('/labs');
-      expect(component.menuItems[2].route).toBe('/resources');
+      expect(component.menuItems[1].route).toBe('/resources');
+      expect(component.menuItems[2].route).toBe('/labs');
     });
 
     it('should have correct icons for menu items', () => {
       expect(component.menuItems[0].icon).toBe('dashboard');
-      expect(component.menuItems[1].icon).toBe('labs');
-      expect(component.menuItems[2].icon).toBe('resources');
+      expect(component.menuItems[1].icon).toBe('resources');
+      expect(component.menuItems[2].icon).toBe('labs');
     });
   });
 
