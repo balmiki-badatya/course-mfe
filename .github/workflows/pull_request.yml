@@ -40,15 +40,17 @@ jobs:
         run: |
           npm install -g @angular/cli@19.2.18
           ng version
+          apt-get install yarn
+          rm -rf yarn.lock
       - name: 'Download Build artifacts'
         uses: actions/download-artifact@v5
         with:
            name: my-programs-build-artifact
       - name: 'Unit Testing'
         run: |
-          ng test
+          yarn test
       - name: 'Linting'
-        run: ng lint
+        run: yarn lint
 
 
 
