@@ -4,11 +4,11 @@ import { TopicsListComponent } from './components/topics-list/topics-list.compon
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: '/dashboard',
+    redirectTo: '/programs',
     pathMatch: 'full'
   },
   {
-    path: 'dashboard',
+    path: 'programs',
     component: TopicsListComponent
   },
   {
@@ -21,6 +21,6 @@ export const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: '/dashboard'
+    redirectTo: '/programs'
   }
 ];

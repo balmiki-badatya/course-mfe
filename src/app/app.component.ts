@@ -10,5 +10,5 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'MicroOps';
+  title = 'SkillSync';
 }

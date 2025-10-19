@@ -33,6 +33,11 @@ export class TopicsListComponent implements OnInit {
   }
 
   updatePagination(): void {
+    if (!this.topics || !Array.isArray(this.topics)) {
+      this.totalPages = 0;
+      this.paginatedTopics = [];
+      return;
+    }
     this.totalPages = Math.ceil(this.topics.length / this.itemsPerPage);
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     const endIndex = startIndex + this.itemsPerPage;
@@ -95,9 +100,16 @@ export class TopicsListComponent implements OnInit {
     return this.addingSubtopicFor === parentId;
   }
 
+  deleteSubtopic(parentId: string, subtopicId: string): void {
+    // This method is currently disabled by default
+    // In the future, this will be enabled based on user role/permissions
+    console.log(`Delete subtopic ${subtopicId} from parent ${parentId} - Permission required`);
+    // this.topicsService.deleteSubtopic(parentId, subtopicId);
+  }
+
   updateTopicName(topicId: string, event: Event): void {
     const input = event.target as HTMLInputElement;
-    if (input.value.trim()) {
+    if (input && input.value && input.value.trim()) {
       this.topicsService.updateTopicName(topicId, input.value.trim());
     }
   }
@@ -112,7 +124,7 @@ export class TopicsListComponent implements OnInit {
   }
 
   addNewTopic(): void {
-    if (this.newTopicName.trim()) {
+    if (this.newTopicName && this.newTopicName.trim()) {
       this.topicsService.addTopic(this.newTopicName.trim());
       this.newTopicName = '';
       this.isAddingTopic = false;
@@ -149,17 +161,18 @@ export class TopicsListComponent implements OnInit {
   }
 
   getCompletionPercentage(): number {
-    if (this.topics.length === 0) return 0;
+    if (!this.topics || this.topics.length === 0) return 0;
     const completed = this.countCompleted(this.topics);
     const total = this.countTotal(this.topics);
-    return Math.round((completed / total) * 100);
+    return total > 0 ? Math.round((completed / total) * 100) : 0;
   }
 
   private countCompleted(topics: Topic[]): number {
+    if (!topics) return 0;
     let count = 0;
     for (const topic of topics) {
       if (topic.completed) count++;
-      if (topic.subtopics.length > 0) {
+      if (topic.subtopics && topic.subtopics.length > 0) {
         count += this.countCompleted(topic.subtopics);
       }
     }
@@ -167,9 +180,10 @@ export class TopicsListComponent implements OnInit {
   }
 
   private countTotal(topics: Topic[]): number {
+    if (!topics) return 0;
     let count = topics.length;
     for (const topic of topics) {
-      if (topic.subtopics.length > 0) {
+      if (topic.subtopics && topic.subtopics.length > 0) {
         count += this.countTotal(topic.subtopics);
       }
     }

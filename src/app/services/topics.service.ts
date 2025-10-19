@@ -14,9 +14,18 @@ export class TopicsService {
 
   private getInitialTopics(): Topic[] {
     if (isPlatformBrowser(this.platformId)) {
-      const savedTopics = localStorage.getItem('devops-topics');
-      if (savedTopics) {
-        return JSON.parse(savedTopics);
+      try {
+        const savedTopics = localStorage.getItem('devops-topics');
+        if (savedTopics) {
+          const parsed = JSON.parse(savedTopics);
+          // Validate that parsed data is an array
+          if (Array.isArray(parsed)) {
+            return parsed;
+          }
+        }
+      } catch (error) {
+        // If there's an error reading/parsing localStorage, fall through to default topics
+        console.error('Error loading topics from localStorage:', error);
       }
     }
 
@@ -129,10 +138,10 @@ export class TopicsService {
 
   private findTopicById(topics: Topic[], id: string): Topic | null {
     for (const topic of topics) {
-      if (topic.id === id) {
+      if (topic && topic.id === id) {
         return topic;
       }
-      if (topic.subtopics.length > 0) {
+      if (topic && topic.subtopics && topic.subtopics.length > 0) {
         const found = this.findTopicById(topic.subtopics, id);
         if (found) {
           return found;

@@ -288,7 +288,20 @@
   opacity: 0.7;
 }
 
-.edit-subtopic-btn {
+.subtopic-action-btns {
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.subtopic-item:hover .subtopic-action-btns {
+  opacity: 1;
+}
+
+.edit-subtopic-btn,
+.delete-subtopic-btn {
   background: none;
   border: none;
   cursor: pointer;
@@ -297,18 +310,33 @@
   align-items: center;
   justify-content: center;
   color: #9ca3af;
-  transition: opacity 0.15s ease, color 0.15s ease, background 0.15s ease;
+  transition: color 0.15s ease, background 0.15s ease;
   border-radius: 4px;
-  opacity: 0;
-}
-
-.subtopic-item:hover .edit-subtopic-btn {
-  opacity: 1;
 }
 
 .edit-subtopic-btn:hover {
   background: #f3f4f6;
   color: #2563eb;
+}
+
+.delete-subtopic-btn {
+  color: #ef4444;
+}
+
+.delete-subtopic-btn:hover:not(:disabled) {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+.delete-subtopic-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.35;
+  color: #fca5a5;
+}
+
+.delete-subtopic-btn:disabled:hover {
+  background: none;
+  color: #fca5a5;
 }
 
 .topic-name-input.editing {
@@ -431,35 +459,34 @@
 
 .form-actions {
   display: flex;
-  gap: 0.75rem;
+  gap: 0.5rem;
+  justify-content: flex-end;
 }
 
 .save-btn,
 .cancel-btn {
-  padding: 0.75rem 1.5rem;
+  padding: 0.5rem 1rem;
   border: none;
   border-radius: 6px;
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.875rem;
   cursor: pointer;
   transition: background 0.15s ease, border-color 0.15s ease;
 }
 
 .save-btn {
-  background: #2563eb;
+  background: #16a34a;
   color: #ffffff;
-  flex: 1;
 }
 
 .save-btn:hover {
-  background: #1d4ed8;
+  background: #15803d;
 }
 
 .cancel-btn {
   background: #ffffff;
   color: #6b7280;
   border: 1px solid #d1d5db;
-  flex: 1;
 }
 
 .cancel-btn:hover {

@@ -6,7 +6,9 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
+    "test": "ng test --watch=false --browsers=ChromeHeadless",
+    "test:watch": "ng test",
+    "test:ci": "ng test --watch=false --browsers=ChromeHeadlessCI --code-coverage",
     "serve:ssr:my-programs-ui": "node dist/my-programs-ui/server/server.mjs"
   },
   "private": true,
