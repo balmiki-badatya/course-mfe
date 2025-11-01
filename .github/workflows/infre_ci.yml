@@ -1,0 +1,45 @@
+name: Course MFE infra CI
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - devops/**
+permissions:
+  id-token: write   # This is required for requesting the JWT
+  contents: read 
+
+jobs:
+  infra-ci:
+    runs-on: ubuntu-latest
+    name: Provision Infrastructure
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.5.7"
+      - name: Authenticate with AWS OIDC  
+        uses: aws-actions/configure-aws-credentials@v5.1.0
+        with:
+          aws-region: ${{ secrets.AWS_REGION }}
+          role-to-assume: ${{ secrets.ASSUME_ROLE }}
+      - name: Verify authentication
+        run: aws sts get-caller-identity
+      - name: Terraform Plan
+        working-directory: devops
+        run: |
+          terraform plan -var-file="variables/dev/dev.tfvars" -out=tfplan
+      - name: Upload terraform plan 
+        uses: actions/upload-artifact@v4
+        with:
+          name: plan
+          path: /
+          retention-days: 3
+      - name: Apply terraform plan
+        run: |
+          terraform plan show -json tfplan
+          terraform apply -auto-approve tfplan
+      
+

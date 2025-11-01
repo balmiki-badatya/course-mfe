@@ -1,0 +1,66 @@
+name: Infrastructure pr workflow
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - devops/**
+permissions:
+  id-token: write   # This is required for requesting the JWT
+  contents: read 
+jobs:
+  infra_pr_checks:
+    runs-on: ubuntu-latest
+    name: Course MFE infra checks on PR
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v5
+      - name: Setup terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.5.7"
+      - name: Authenticate with AWS OIDC
+        uses: aws-actions/configure-aws-credentials@v5.1.0
+        with:
+          aws-region: ${{ secrets.AWS_REGION }}
+          role-to-assume: ${{ secrets.ASSUME_ROLE }}
+        continue-on-error: false
+      - name: Verify OIDC Authenticate
+        run: |
+          aws sts get-caller-identity
+        continue-on-error: false
+      - name: Initialize terraform
+        working-directory: devops
+        run: |
+          ls -lrt
+          echo "Initializing Terraform"
+          terraform init -backend-config="variables/dev/dev.backend.tfvars"
+      - name: Terraform format checks
+        working-directory: devops
+        run: |
+          set +e
+          echo "Checking if terraform code is formatted"
+          terraform fmt -recursive -check
+          if [ "$?" != 0 ]; then
+            echo "❌ Terraform code is not formmated."
+            exit 1
+          else
+            echo "✅ Terraform is formmated"
+            exit 0
+          fi
+      - name: Validate terraform code
+        working-directory: devops
+        run: |
+          set +e
+          echo "Validating terraform code"
+          terraform validate -no-color -json > tfvalidate.json
+          isValid=$(jq ".valid" tfvalidate.json)
+          if [ "$isValid" = "true" ]; then
+            echo "❌ Terraform is not valid."
+            exit 1
+          else
+            echo "✅ Teraform successfully validated"
+            exit 0
+          fi
+        shell: bash
+
