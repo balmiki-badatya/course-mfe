@@ -38,9 +38,28 @@ jobs:
           terraform init -backend-config="variables/dev/dev.backend.tfvars"
       - name: Terraform format checks
         run: |
+          set +e
           echo "Checking if terraform code is formatted"
           terraform fmt -recursive -check
+          if[ "$?" != 0 ]; then
+            echo "❌ Terraform code is not formmated."
+            exit 1
+          else
+            echo "✅ Teraform is formatted"
+            exit 0
+          fi
       - name: Validate terraform code
-        run: | 
+        run: |
+          set +e
           echo "Validating terraform code"
-          terraform validate -var-file="variables/dev/dev.tfvars"
+          terraform validate -no-color -json > tfvalidate.json
+          isValid=$(jq ".valid" tfvalidate.json)
+          if[ "$isValid" = "true" ]; then
+            echo "❌ Terraform is not valid."
+            exit 1
+          else
+            echo "✅ Teraform successfully validated"
+            exit 0
+          fi
+        shell: bash
+
