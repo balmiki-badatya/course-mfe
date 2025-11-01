@@ -32,29 +32,32 @@ jobs:
           aws sts get-caller-identity
         continue-on-error: false
       - name: Initialize terraform
+        working-directory: devops
         run: |
           ls -lrt
           echo "Initializing Terraform"
-          terraform init -backend-config="variables/dev/dev.backend.tfvars"
+          terraform init -backend-config="devops/variables/dev/dev.backend.tfvars"
       - name: Terraform format checks
+        working-directory: devops
         run: |
           set +e
           echo "Checking if terraform code is formatted"
           terraform fmt -recursive -check
-          if[ "$?" != 0 ]; then
+          if [ "$?" != 0 ]; then
             echo "❌ Terraform code is not formmated."
             exit 1
           else
-            echo "✅ Teraform is formatted"
+            echo "✅ Terraform is formmated"
             exit 0
           fi
       - name: Validate terraform code
+        working-directory: devops
         run: |
           set +e
           echo "Validating terraform code"
           terraform validate -no-color -json > tfvalidate.json
           isValid=$(jq ".valid" tfvalidate.json)
-          if[ "$isValid" = "true" ]; then
+          if [ "$isValid" = "true" ]; then
             echo "❌ Terraform is not valid."
             exit 1
           else
