@@ -34,7 +34,7 @@ jobs:
         run: |
           ls -lrt
           echo "Initializing Terraform"
-          terraform init -backend-config="devops/variables/dev/dev.backend.tfvars"
+          terraform init -backend-config="variables/dev/dev.backend.tfvars"
       - name: Terraform format checks
         working-directory: devops
         run: |
