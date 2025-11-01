@@ -31,6 +31,9 @@ jobs:
         working-directory: devops
         run: |
           terraform plan -var-file="variables/dev/dev.tfvars" -out=tfplan
+      - name: Initialize terraform
+        working-directory: devops
+        run: terraform init -backend-config="variables/dev/dev.backend.tfvars"
       - name: Upload terraform plan 
         uses: actions/upload-artifact@v4
         with:
