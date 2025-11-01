@@ -24,8 +24,8 @@ jobs:
       - name: Authenticate with AWS OIDC
         uses: aws-actions/configure-aws-credentials@v5.1.0
         with:
-          aws-region: ${secrets.AWS_REGION}
-          role-to-assume: ${secrets.AWS_REGION}
+          aws-region: ${{ secrets.AWS_REGION }}
+          role-to-assume: ${{ secrets.ASSUME_ROLE }}
         continue-on-error: false
       - name: Verify OIDC Authenticate
         run: |
