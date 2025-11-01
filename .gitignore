@@ -25,3 +25,5 @@ node_modules/
 .angular/
 dist/
 .claude
+
+.DS_Store
