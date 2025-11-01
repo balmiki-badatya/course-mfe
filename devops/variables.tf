@@ -50,7 +50,7 @@ variable "acl" {
   description = "Bucket acl"
 
   validation {
-    condition     = contins(["private", "public-read", "public-read-write", "aws-exec-read", "authenticated-read", "bucket-owner-read", "bucket-owner-full-control", "log-delivery-write"])
+    condition     = contins(["private", "public-read", "public-read-write", "aws-exec-read", "authenticated-read", "bucket-owner-read", "bucket-owner-full-control", "log-delivery-write"], var.acl)
     error_message = "Invalid acl."
   }
 
