@@ -9,7 +9,7 @@ domain_name      = "skillsync"
 
 ######## bucket vars #######
 s3_bucket_name           = "course_mfe_build_artifacts"
-enable_bucket_versioning = true
+enable_bucket_versioning = "Enabled"
 ownership_ctl            = "BucketOwnerEnforced"
 acl                      = "private"
 block_public_acls        = true

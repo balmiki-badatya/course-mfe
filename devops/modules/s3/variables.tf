@@ -2,7 +2,7 @@ variable "bucket_configurations" {
   type = object({
     s3_bucket_name           = string
     default_tags             = map(string)
-    enable_bucket_versioning = bool
+    enable_bucket_versioning = string
     acl                      = optional(string, "private")
     ownership_ctl            = string
   })
