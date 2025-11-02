@@ -4,6 +4,11 @@ variable "application_name" {
   description = "Application name"
 }
 
+variable "domain_name" {
+  type        = string
+  description = "Domain name"
+}
+
 variable "created_by" {
   type        = string
   description = "Created by"
@@ -45,7 +50,7 @@ variable "acl" {
   description = "Bucket acl"
 
   validation {
-    condition     = contins(["private", "public-read", "public-read-write", "aws-exec-read", "authenticated-read", "bucket-owner-read", "bucket-owner-full-control", "log-delivery-write"], var.acl)
+    condition     = contains(["private", "public-read", "public-read-write", "aws-exec-read", "authenticated-read", "bucket-owner-read", "bucket-owner-full-control", "log-delivery-write"], var.acl)
     error_message = "Invalid acl."
   }
 
