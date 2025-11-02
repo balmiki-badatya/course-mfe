@@ -8,7 +8,7 @@ default_region   = "us-west-1"
 domain_name      = "skillsync"
 
 ######## bucket vars #######
-s3_bucket_name           = "course_mfe_build_artifacts"
+s3_bucket_name           = "course-mfe-build-artifacts"
 enable_bucket_versioning = "Enabled"
 ownership_ctl            = "BucketOwnerEnforced"
 acl                      = "private"
