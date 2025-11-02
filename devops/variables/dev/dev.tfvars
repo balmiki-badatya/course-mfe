@@ -5,6 +5,7 @@ created_by       = "Terraform"
 managed_by       = "Github-actions"
 env              = "dev"
 default_region   = "us-west-1"
+domain_name      = "skillsync"
 
 ######## bucket vars #######
 s3_bucket_name           = "course_mfe_build_artifacts"
