@@ -54,6 +54,7 @@ jobs:
           set +e
           echo "Validating terraform code"
           terraform validate -no-color -json > tfvalidate.json
+          cat tfvalidate.json
           isValid=$(jq ".valid" tfvalidate.json)
           if [ "$isValid" = "true" ]; then
             echo "❌ Terraform is not valid."
