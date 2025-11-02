@@ -25,6 +25,10 @@ jobs:
           role-to-assume: ${{ secrets.ASSUME_ROLE }}
       - name: Verify authentication
         run: aws sts get-caller-identity
+      - name: Intialize terraform
+        working-directory: devops
+        run: |
+          terraform init -backend-config="variables/dev/dev.backend.tfvars"
       - name: Terraform Plan
         working-directory: devops
         run: |
