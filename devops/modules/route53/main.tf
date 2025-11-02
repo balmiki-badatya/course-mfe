@@ -6,7 +6,7 @@ resource "aws_route53_zone" "skillsync" {
 }
 
 resource "aws_route53_record" "skillsync-ns" {
-  zone_id = var.root_domain_zone.id
+  zone_id = var.root_domain_zone_id
   name    = var.sub_domain_name
   type    = "NS"
   ttl     = var.ns_record_ttl
