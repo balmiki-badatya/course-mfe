@@ -19,7 +19,7 @@ variable "validation_method" {
 }
 
 variable "allow_exports" {
-  type        = bool
+  type        = string
   description = "Allow exporting certificate"
 }
 

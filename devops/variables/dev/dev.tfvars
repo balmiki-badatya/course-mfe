@@ -26,7 +26,7 @@ ns_record_ttl          = 172800
 ######## ACM config vars ############
 cloudfront_acm_region = "us-east-1"
 validation_method     = "DNS"
-allow_exports         = true
+allow_exports         = "DISABLED"
 key_algorithm         = "RSA_2048"
 
 
