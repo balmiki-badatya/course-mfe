@@ -18,7 +18,7 @@ data "aws_route53_zone" "root_domain" {
 module "s3" {
   source = "./modules/s3"
   bucket_configurations = {
-    s3_bucket_name           = var.s3_bucket_name
+    s3_bucket_name           = "${var.s3_bucket_name}-${var.region}"
     default_tags             = local.default_tags
     enable_bucket_versioning = var.enable_bucket_versioning
     acl                      = var.acl
