@@ -36,7 +36,7 @@ variable "s3_bucket_name" {
 }
 
 variable "enable_bucket_versioning" {
-  type        = bool
+  type        = string
   description = "This flag will enable bucket versioning."
 }
 
