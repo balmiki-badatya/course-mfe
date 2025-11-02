@@ -4,11 +4,6 @@ variable "application_name" {
   description = "Application name"
 }
 
-variable "domain_name" {
-  type        = string
-  description = "Domain name"
-}
-
 variable "created_by" {
   type        = string
   description = "Created by"
