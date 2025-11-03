@@ -29,6 +29,7 @@ module "s3" {
     block_public_policy     = var.block_public_policy
     ignore_public_acls      = var.ignore_public_acls
     restrict_public_buckets = var.restrict_public_buckets
+    bucket_policy           = module.iam.cloudfront_s3_policy_details
   }
 }
 

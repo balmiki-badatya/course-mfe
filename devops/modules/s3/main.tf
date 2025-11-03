@@ -30,3 +30,8 @@ resource "aws_s3_bucket_versioning" "course_mfe_bucket_versioning" {
     status = var.bucket_configurations.enable_bucket_versioning
   }
 }
+
+resource "aws_s3_bucket_policy" "course_mfe_artifact_bucket_policy" {
+  bucket = aws_s3_bucket.course_mfe_artifact.bucket
+  policy = var.bucket_security_configuration.bucket_policy
+}

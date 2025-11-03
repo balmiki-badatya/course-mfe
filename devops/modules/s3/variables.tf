@@ -19,6 +19,7 @@ variable "bucket_security_configuration" {
     block_public_policy     = bool
     ignore_public_acls      = bool
     restrict_public_buckets = bool
+    bucket_policy           = string
   })
   description = "Access flags for the s3."
 }
