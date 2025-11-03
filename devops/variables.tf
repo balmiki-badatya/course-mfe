@@ -155,14 +155,6 @@ variable "signing_behavior" {
   }
 }
 
-variable "signing_protocol" {
-  type        = string
-  description = "Signin is proctolo for OAC"
-  validation {
-    condition     = contains("sigv4", var.signing_protocol)
-    error_message = "Only allowed valu is sigv4"
-  }
-}
 variable "is_distribution_enabled" {
   type        = bool
   description = "Whether the distribution is enabled to accept end user requests for content."
