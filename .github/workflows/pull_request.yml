@@ -6,6 +6,7 @@ on:
     paths-ignore:
       - README.md
       - devops/**
+      - .github/**
 jobs:
   Build:
     name: 'Build'

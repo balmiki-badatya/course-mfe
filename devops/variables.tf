@@ -28,6 +28,12 @@ variable "region" {
 #   type        = string
 #   description = "VPC id"
 # }
+
+variable "env" {
+  type        = string
+  description = "Environment"
+
+}
 #####################################################################################################
 ########################################### S3 bucet vars ###########################################
 variable "s3_bucket_name" {
@@ -124,5 +130,113 @@ variable "allow_exports" {
 variable "key_algorithm" {
   type        = string
   description = "ACM certificate key algorithm."
+}
+#####################################################################################################
+###########################################cloud front vars###########################################
+
+variable "origin_access_control_origin_type" {
+  type        = string
+  description = "Origin access control origin type"
+
+  validation {
+    condition     = contains(["s3", "lambda", "mediapackagev2", "mediastore"], var.origin_access_control_origin_type)
+    error_message = "Invalid value origin_access_control_origin_type."
+
+  }
+}
+
+variable "signing_behavior" {
+  type        = string
+  description = "Signin behaviour"
+
+  validation {
+    condition     = contains(["always", "never", "no-override"], var.signing_behavior)
+    error_message = "Invalid value for signing_behavior"
+  }
+}
+
+variable "signing_protocol" {
+  type        = string
+  description = "Signin is proctolo for OAC"
+  validation {
+    condition     = contains("sigv4", var.signing_protocol)
+    error_message = "Only allowed valu is sigv4"
+  }
+}
+variable "is_distribution_enabled" {
+  type        = bool
+  description = "Whether the distribution is enabled to accept end user requests for content."
+}
+
+variable "is_ipv6_enabled" {
+  type        = bool
+  description = "Whether the IPv6 is enabled for the distribution."
+}
+
+variable "commnet" {
+  type        = string
+  description = "Cloudfron description"
+}
+
+variable "default_root_object" {
+  type        = string
+  description = "Landing page object"
+}
+
+variable "cloudfront_aliases" {
+  type        = set(string)
+  description = "Alias for cloudfront distribution"
+}
+
+variable "allowed_methods" {
+  type        = set(string)
+  description = "List of Http methods to allow."
+}
+
+variable "cached_methods" {
+  type        = set(string)
+  description = "Set of Http method to cache."
+}
+
+variable "viewer_protocol_policy" {
+  type        = string
+  description = "viewer_protocol_policy"
+
+  validation {
+    condition     = contains(["allow-all", "https-only", "redirect-to-https"], var.viewer_protocol_policy)
+    error_message = "Invalid value for viewer_protocol_policy"
+  }
+}
+
+variable "cache_policy_id" {
+  type        = string
+  description = "cache_policy_id"
+}
+
+variable "wait_for_deployment" {
+  type        = bool
+  description = "Wait for deployment to complete"
+}
+
+variable "cloudfront_price_class" {
+  type        = string
+  description = "Cloudfront price class"
+}
+
+variable "ssl_support_method" {
+  type        = string
+  description = "ssl_support_method"
+}
+
+#####################################################################################################
+###########################################   IAM  vars.  ###########################################
+variable "sid" {
+  type        = string
+  description = "SID for the cloudfront IAM policy"
+}
+
+variable "s3_permissions" {
+  type        = set(string)
+  description = "S3 Permission set"
 }
 
