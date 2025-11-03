@@ -52,6 +52,41 @@ module "acm" {
   allow_exports      = var.allow_exports
   key_algorithm      = var.key_algorithm
   domain_zone_id     = module.roue53.subdomain_details.zone_id
+  providers = {
+    aws = aws.alias_us_east_1
+  }
 }
 
+# Create cloudfront distribution 
 
+module "cloudfront" {
+  source                            = "./modules/cloudfront"
+  env                               = var.env
+  default_tags                      = local.default_tags
+  oac_name                          = "${var.s3_bucket_name}-cloudfront-distribution-oac"
+  origin_access_control_origin_type = var.origin_access_control_origin_type
+  signing_behavior                  = var.signing_behavior
+  bucket_regional_domain_name       = module.s3.course_mfe_s3_bucket_details.bucket_regional_domain_name
+  bucket_origin_id                  = module.s3.course_mfe_s3_bucket_details.bucket_id
+  is_distribution_enabled           = var.is_distribution_enabled
+  is_ipv6_enabled                   = var.is_ipv6_enabled
+  commnet                           = var.commnet
+  default_root_object               = var.default_root_object
+  cloudfront_aliases                = var.cloudfront_aliases
+  allowed_methods                   = var.allowed_methods
+  cached_methods                    = var.cached_methods
+  viewer_protocol_policy            = var.viewer_protocol_policy
+  cache_policy_id                   = var.cache_policy_id
+  certificate_arn                   = module.acm.certificate_details.arn
+  wait_for_deployment               = var.wait_for_deployment
+  cloudfront_price_class            = var.cloudfront_price_class
+  ssl_support_method                = var.ssl_support_method
+}
+
+module "iam" {
+  source                      = "./modules/iam"
+  policy_sid                  = var.sid
+  s3_permissions              = var.s3_permissions
+  cloudfront_distribution_arn = module.cloudfront.couldfront_distribution_details.arn
+  aws_s3_bucket_arn           = module.s3.course_mfe_s3_bucket_details.arn
+}

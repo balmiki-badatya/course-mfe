@@ -15,12 +15,6 @@ resource "aws_s3_bucket_ownership_controls" "course_mfe_bucket_ownership_ctl" {
   }
 }
 
-resource "aws_s3_bucket_acl" "course_mfe_bucket_acl" {
-  bucket     = aws_s3_bucket.course_mfe_artifact.id
-  acl        = var.bucket_configurations.acl
-  depends_on = [aws_s3_bucket_ownership_controls.course_mfe_bucket_ownership_ctl]
-}
-
 resource "aws_s3_bucket_public_access_block" "course_mfe_bucket_access" {
   bucket = aws_s3_bucket.course_mfe_artifact.id
 

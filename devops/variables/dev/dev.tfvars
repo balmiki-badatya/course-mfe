@@ -29,4 +29,24 @@ validation_method     = "DNS"
 allow_exports         = "DISABLED"
 key_algorithm         = "RSA_2048"
 
+######## CloudFront config vars ############
+origin_access_control_origin_type = "s3"
+signing_behavior                  = "always"
+signing_protocol                  = "sigv4"
+is_distribution_enabled           = true
+is_ipv6_enabled                   = true
+commnet                           = "CloudFront distribution for course-mfe dev environment"
+default_root_object               = "index.html"
+cloudfront_aliases                = ["skillsync.microops.io"]
+allowed_methods                   = ["GET", "HEAD", "OPTIONS", "PUT", "POST", "PATCH", "DELETE"]
+cached_methods                    = ["GET", "HEAD", "OPTIONS"]
+viewer_protocol_policy            = "redirect-to-https"
+cache_policy_id                   = "658327ea-f89d-4fab-a63d-7e88639e58f6" # Managed-CachingOptimized
+wait_for_deployment               = true
+cloudfront_price_class            = "PriceClass_All"
+ssl_support_method                = "sni-only"
+
+######## IAM Policy vars ############
+sid            = "AllowCloudFrontServiceReadOnlyPrincipal"
+s3_permissions = ["s3:GetObject"]
 

@@ -1,0 +1,65 @@
+name: Manul Infra Trigger Workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: Action type
+        required: true
+        default: Apply
+        type: choice
+        options:
+          - Apply
+          - Destroy
+      
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  manual-infra-trigger:
+    runs-on: ubuntu-latest
+    name: "Manual Infra Trigger"
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.5.7"
+      - name: Authenticate with OIDC
+        uses: aws-actions/configure-aws-credentials@v5.1.0
+        with:
+          aws-region: ${{ secrets.AWS_REGION }}
+          role-to-assume: ${{ secrets.ASSUME_ROLE }}
+      - name: Get caller identity
+        run: aws sts get-caller-identity
+      - name: Initialize terraform
+        working-directory: devops
+        run: |
+          terraform init -backend-config="variables/dev/dev.backend.tfvars"
+      - name: Terraform plan
+        working-directory: devops
+        run: |
+          set +e
+          action=${{ inputs.action }}
+          if [[ "$action" = "Destroy" ]]; then
+            terraform plan -destroy -var-file="variables/dev/dev.tfvars" -out=tfplan-destroy
+          else
+            terraform plan -var-file="variables/dev/dev/tfvars" -out=tfplan
+          fi
+        shell: bash
+      - name: Terraform apply
+        working-directory: devops
+        if: ${{ inputs.action == "Apply" }}
+        run: |
+          terraform show -json tfplan
+          terraform apply -auto-approve tfplan
+      - name: Terraform destroy
+        if: ${{ inputs.action == "Destroy" }}
+        working-directory: devops
+        run: |
+          terraform state list
+          terraform show -json tfplan-destroy
+          terraform destroy -auto-approve tfplan-destroy
+

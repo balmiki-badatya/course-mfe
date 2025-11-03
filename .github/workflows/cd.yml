@@ -1,0 +1,59 @@
+name: Course MFE CI/CD
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - devops/**
+permissions:
+  id-token: write
+  contents: read
+jobs:
+  CI:
+    name: Couse MFE CI
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+      - name: Setup node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 20.19.5
+      - name: Install
+        run: yarn install
+      - name: Build
+        run: yarn build
+      - name: Test
+        run: yarn test
+      - name: Lint
+        run: yarn lint
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          path: dist
+          name: build-artifacts
+          retention-days: 3
+  CD:
+    name: Course MFE CD
+    runs-on: ubuntu-latest
+    needs: [CI]
+    steps:
+      - name: Download Build artifacts
+        uses: actions/download-artifact@v5
+        with:
+          name: build-artifacts
+          path: .
+      - name: Authenticate with AWS
+        uses: aws-actions/configure-aws-credentials@v5.1.0
+        with:
+          aws-region: ${{ secrets.AWS_REGION }}
+          role-to-assume: ${{ secrets.ASSUME_ROLE }}
+      - name: Get Caller identity
+        run: |
+          aws sts get-caller-identity
+      - name: Upload to S3
+        run: |
+          ls -lrt
+          aws s3 sync dist ${{ secrets.S3_BUCKET }}
+
