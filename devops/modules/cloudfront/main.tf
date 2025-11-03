@@ -1,5 +1,5 @@
 locals {
-  signing_protocol = "sig4"
+  signing_protocol = "sigv4"
 }
 
 resource "aws_cloudfront_origin_access_control" "skillsync_default_oac" {

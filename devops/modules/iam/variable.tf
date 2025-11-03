@@ -14,7 +14,7 @@ variable "s3_permissions" {
   nullable    = false
 
   validation {
-    condition     = lengh(var.s3_permissions) >= 1 && contains("s3:GetObject", var.s3_permissions)
+    condition     = length(var.s3_permissions) >= 1 && contains("s3:GetObject", var.s3_permissions)
     error_message = "value"
   }
 }
