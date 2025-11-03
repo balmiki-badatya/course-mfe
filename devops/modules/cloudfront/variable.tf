@@ -1,5 +1,5 @@
 variable "cloudfront_aliases" {
-  type        = ste(string)
+  type        = set(string)
   description = "Set of aliases for cloudfront distribution."
 }
 
