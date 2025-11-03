@@ -1,5 +1,5 @@
 {
-  "name": "my-programs-ui",
+  "name": "course-mfe",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -10,7 +10,7 @@
     "test:watch": "ng test",
     "test:ci": "ng test --watch=false --browsers=ChromeHeadlessCI --code-coverage",
     "lint": "ng lint",
-    "serve:ssr:my-programs-ui": "node dist/my-programs-ui/server/server.mjs"
+    "serve:ssr:course-mfe": "node dist/course-mfe/server/server.mjs"
   },
   "private": true,
   "dependencies": {
