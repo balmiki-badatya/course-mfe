@@ -37,14 +37,12 @@ resource "aws_cloudfront_distribution" "skillsync_distribution" {
   price_class = var.cloudfront_price_class
   restrictions {
     geo_restriction {
-      restriction_type = {
-        restriction_type = "blacklist"
-        locations        = ["CN", "TW", "TR", "AF", "PK"]
-      }
+      restriction_type = "blacklist"
+      locations        = ["CN", "TW", "TR", "AF", "PK"]
     }
   }
 
-  tags = merge(var.env, var.default_tags)
+  tags = merge({ Environment = var.env }, var.default_tags)
 
   viewer_certificate {
     acm_certificate_arn = var.certificate_arn
