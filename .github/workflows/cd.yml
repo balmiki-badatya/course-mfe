@@ -55,7 +55,6 @@ jobs:
       - name: Upload to S3
         run: |
           ls -lrt
-          cd course-mfe
-          ls -lrt
+          ls -lrth course-mfe
           aws s3 sync course-mfe ${{ secrets.S3_BUCKET }}
 
