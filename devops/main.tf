@@ -82,6 +82,7 @@ module "cloudfront" {
   wait_for_deployment               = var.wait_for_deployment
   cloudfront_price_class            = var.cloudfront_price_class
   ssl_support_method                = var.ssl_support_method
+  depends_on                        = [module.acm]
 }
 
 module "iam" {

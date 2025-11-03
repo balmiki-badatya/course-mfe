@@ -11,7 +11,7 @@ on:
         options:
           - Apply
           - Destroy
-      
+
 permissions:
   id-token: write
   contents: read
@@ -51,12 +51,12 @@ jobs:
         shell: bash
       - name: Terraform apply
         working-directory: devops
-        if: ${{ inputs.action == "Apply" }}
+        if: ${{ github.event.inputs.action == "Apply" }}
         run: |
           terraform show -json tfplan
           terraform apply -auto-approve tfplan
       - name: Terraform destroy
-        if: ${{ inputs.action == "Destroy" }}
+        if: ${{ github.event.inputs.action == "Destroy" }}
         working-directory: devops
         run: |
           terraform state list
