@@ -33,7 +33,7 @@ jobs:
         with:
           path: dist
           name: build-artifacts
-          retention-days: 3
+          retention-days: 1
   CD:
     name: Course MFE CD
     runs-on: ubuntu-latest
