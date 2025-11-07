@@ -14,6 +14,7 @@ resource "aws_cloudfront_distribution" "skillsync_distribution" {
     domain_name              = var.bucket_regional_domain_name
     origin_access_control_id = aws_cloudfront_origin_access_control.skillsync_default_oac.id
     origin_id                = var.bucket_origin_id
+    origin_path              = var.origin_path
   }
 
   enabled             = var.is_distribution_enabled
@@ -45,8 +46,9 @@ resource "aws_cloudfront_distribution" "skillsync_distribution" {
   tags = merge({ Environment = var.env }, var.default_tags)
 
   viewer_certificate {
-    acm_certificate_arn = var.certificate_arn
-    ssl_support_method  = var.ssl_support_method
+    acm_certificate_arn      = var.certificate_arn
+    ssl_support_method       = var.ssl_support_method
+    minimum_protocol_version = var.minimum_proctocol_version
   }
   wait_for_deployment = var.wait_for_deployment
 }
