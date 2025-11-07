@@ -60,6 +60,5 @@ jobs:
         working-directory: devops
         run: |
           terraform state list
-          terraform show -json tfplan-destroy
-          terraform apply tfplan-destroy -auto-approve
+          terraform destroy -auto-approve -var-file="variables/dev/dev.tfvars""
 
