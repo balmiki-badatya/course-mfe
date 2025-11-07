@@ -61,5 +61,5 @@ jobs:
         run: |
           terraform state list
           terraform show -json tfplan-destroy
-          terraform destroy tfplan-destroy -auto-approve
+          terraform apply tfplan-destroy -auto-approve
 
