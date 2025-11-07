@@ -103,3 +103,13 @@ variable "cached_methods" {
   type        = set(string)
   description = "HTTP methods to cache"
 }
+
+variable "minimum_proctocol_version" {
+  type        = string
+  description = "Cloudfront Proctocol version"
+}
+
+variable "origin_path" {
+  type        = string
+  description = "S3 Origin path"
+}

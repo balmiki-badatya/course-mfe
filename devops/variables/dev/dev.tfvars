@@ -45,6 +45,8 @@ cache_policy_id                   = "658327ea-f89d-4fab-a63d-7e88639e58f6" # Man
 wait_for_deployment               = true
 cloudfront_price_class            = "PriceClass_All"
 ssl_support_method                = "sni-only"
+minimum_proctocol_version         = "TLSv1.2_2021"
+origin_path                       = "/browser"
 
 ######## IAM Policy vars ############
 sid            = "AllowCloudFrontServiceReadOnlyPrincipal"

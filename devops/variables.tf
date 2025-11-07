@@ -220,6 +220,16 @@ variable "ssl_support_method" {
   description = "ssl_support_method"
 }
 
+variable "minimum_proctocol_version" {
+  type        = string
+  description = "Cloudfront proctocol version"
+}
+
+variable "origin_path" {
+  type        = string
+  description = "S3 bucket origin path for clod front"
+}
+
 #####################################################################################################
 ###########################################   IAM  vars.  ###########################################
 variable "sid" {
