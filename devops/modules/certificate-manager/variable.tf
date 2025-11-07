@@ -32,3 +32,8 @@ variable "domain_zone_id" {
   type        = string
   description = "Zone ID where the certificate validation record (CNAME) will get created"
 }
+
+variable "sans" {
+  type        = set(string)
+  description = "Subject_alternative_names."
+}
