@@ -27,3 +27,5 @@ dist/
 .claude
 
 .DS_Store
+.terraform
+*.hcl
