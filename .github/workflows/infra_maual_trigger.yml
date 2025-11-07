@@ -60,5 +60,6 @@ jobs:
         working-directory: devops
         run: |
           terraform state list
-          terraform destroy -auto-approve -var-file="variables/dev/dev.tfvars""
+          terraform destroy -auto-approve -var-file="variables/dev/dev.tfvars"
+        shell: bash
 
