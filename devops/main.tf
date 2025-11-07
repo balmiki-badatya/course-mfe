@@ -48,11 +48,12 @@ module "acm" {
   source             = "./modules/certificate-manager"
   default_tags       = local.default_tags
   certificate_region = var.cloudfront_acm_region
-  domain_name        = "*.${var.sub_domain_name}"
+  domain_name        = var.sub_domain_name
   validation_method  = var.validation_method
   allow_exports      = var.allow_exports
   key_algorithm      = var.key_algorithm
   domain_zone_id     = module.roue53.subdomain_details.zone_id
+  sans               = ["*.${var.sub_domain_name}"]
   providers = {
     aws = aws.alias_us_east_1
   }

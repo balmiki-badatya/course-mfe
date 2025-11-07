@@ -1,7 +1,8 @@
 resource "aws_acm_certificate" "domain_cert" {
-  domain_name       = var.domain_name
-  validation_method = var.validation_method
-  key_algorithm     = var.key_algorithm
+  domain_name               = var.domain_name
+  validation_method         = var.validation_method
+  key_algorithm             = var.key_algorithm
+  subject_alternative_names = var.sans
   options {
     export = var.allow_exports
   }
