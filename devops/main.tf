@@ -84,6 +84,8 @@ module "cloudfront" {
   cloudfront_price_class            = var.cloudfront_price_class
   ssl_support_method                = var.ssl_support_method
   depends_on                        = [module.acm]
+  minimum_proctocol_version = var.minimum_proctocol_version
+  origin_path = var.origin_path
 }
 
 module "iam" {
