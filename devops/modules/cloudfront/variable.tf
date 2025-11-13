@@ -133,3 +133,24 @@ variable "response_page_path" {
   type        = string
   description = "Error responce page path"
 }
+
+variable "route53_zone_id" {
+  type        = string
+  description = "Cloudfront distibution route53 hosted zone id"
+}
+
+variable "domain_name" {
+  type        = string
+  description = "Cloudfront distribution route53 domain name"
+}
+
+variable "route53_record_type" {
+  type        = string
+  description = "Cloudfront route53 record tyepe"
+}
+
+variable "enable_evaluate_target_health" {
+  type        = bool
+  description = "Enable evaluate target health"
+
+}

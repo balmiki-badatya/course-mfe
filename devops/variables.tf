@@ -250,6 +250,15 @@ variable "response_page_path" {
   description = "Error responce page path"
 }
 
+variable "cloudfront_route53_record_type" {
+  type        = string
+  description = "Cloudfront route 53 record type"
+}
+
+variable "cf_enable_evaluate_target_health" {
+  type        = bool
+  description = "Cloudfront route53 record evaluation target health"
+}
 #####################################################################################################
 ###########################################   IAM  vars.  ###########################################
 variable "sid" {
