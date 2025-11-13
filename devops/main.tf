@@ -90,6 +90,10 @@ module "cloudfront" {
   error_code                        = var.error_code
   response_code                     = var.response_code
   response_page_path                = var.response_page_path
+  domain_name                       = var.sub_domain_name
+  route53_zone_id                   = module.roue53.subdomain_details.zone_id
+  route53_record_type               = var.cloudfront_route53_record_type
+  enable_evaluate_target_health     = var.cf_enable_evaluate_target_health
 }
 
 module "iam" {

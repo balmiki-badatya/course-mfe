@@ -51,8 +51,10 @@ error_caching_min_ttl             = 300
 error_code                        = 400
 response_code                     = 200
 response_page_path                = "index.html"
+cloudfront_route53_record_type    = "A"
+cf_enable_evaluate_target_health  = false
 
 ######## IAM Policy vars ############
 sid            = "AllowCloudFrontServiceReadOnlyPrincipal"
-s3_permissions = ["s3:GetObject"]
+s3_permissions = ["s3:GetObject", "s3:ListBucket"]
 

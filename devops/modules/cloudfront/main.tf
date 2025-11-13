@@ -61,3 +61,16 @@ resource "aws_cloudfront_distribution" "skillsync_distribution" {
   }
   wait_for_deployment = var.wait_for_deployment
 }
+
+
+resource "aws_route53_record" "cf_route53_record" {
+  zone_id = var.route53_zone_id
+  name    = var.domain_name
+  type    = var.route53_record_type
+
+  alias {
+    name                   = aws_cloudfront_distribution.skillsync_distribution.domain_name
+    zone_id                = aws_cloudfront_distribution.skillsync_distribution.hosted_zone_id
+    evaluate_target_health = var.enable_evaluate_target_health
+  }
+}
