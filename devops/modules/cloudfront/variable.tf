@@ -115,7 +115,7 @@ variable "origin_path" {
 }
 
 variable "error_caching_min_ttl" {
-  type        = string
+  type        = number
   description = "Error caching min ttl"
 }
 
