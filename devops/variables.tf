@@ -230,6 +230,26 @@ variable "origin_path" {
   description = "S3 bucket origin path for clod front"
 }
 
+variable "error_caching_min_ttl" {
+  type        = number
+  description = "Error caching min ttl"
+}
+
+variable "error_code" {
+  type        = number
+  description = "Error code"
+}
+
+variable "response_code" {
+  type        = number
+  description = "Response code"
+}
+
+variable "response_page_path" {
+  type        = string
+  description = "Error responce page path"
+}
+
 #####################################################################################################
 ###########################################   IAM  vars.  ###########################################
 variable "sid" {
