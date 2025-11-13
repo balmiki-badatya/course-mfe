@@ -34,7 +34,7 @@ module "s3" {
 }
 
 # Create domain for course MFE as this is entry point. It will be root for SkillSync
-module "roue53-subdomain" {
+module "roue53" {
   source              = "./modules/route53"
   root_domain_zone_id = data.aws_route53_zone.root_domain.zone_id
   sub_domain_name     = var.sub_domain_name
@@ -91,7 +91,7 @@ module "cloudfront" {
   response_code                     = var.response_code
   response_page_path                = var.response_page_path
   domain_name                       = var.sub_domain_name
-  route53_zone_id                   = module.roue53-subdomain.subdomain_details.zone_id
+  route53_zone_id                   = module.roue53.subdomain_details.zone_id
   route53_record_type               = var.cloudfront_route53_record_type
   enable_evaluate_target_health     = var.cf_enable_evaluate_target_health
 }
