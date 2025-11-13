@@ -50,7 +50,7 @@ origin_path                       = "/browser"
 error_caching_min_ttl             = 300
 error_code                        = 400
 response_code                     = 200
-response_page_path                = "/index.html"
+response_page_path                = "index.html"
 
 ######## IAM Policy vars ############
 sid            = "AllowCloudFrontServiceReadOnlyPrincipal"
