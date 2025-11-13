@@ -47,6 +47,10 @@ cloudfront_price_class            = "PriceClass_All"
 ssl_support_method                = "sni-only"
 minimum_proctocol_version         = "TLSv1.2_2021"
 origin_path                       = "/browser"
+error_caching_min_ttl             = 300
+error_code                        = 400
+response_code                     = 200
+response_page_path                = "/index.html"
 
 ######## IAM Policy vars ############
 sid            = "AllowCloudFrontServiceReadOnlyPrincipal"

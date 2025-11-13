@@ -43,6 +43,15 @@ resource "aws_cloudfront_distribution" "skillsync_distribution" {
     }
   }
 
+  # custom error response page
+  custom_error_response {
+    error_caching_min_ttl = var.error_caching_min_ttl
+    error_code            = var.error_code
+    response_code         = var.response_code
+    response_page_path    = "${var.origin_path}/${var.response_page_path}"
+
+  }
+
   tags = merge({ Environment = var.env }, var.default_tags)
 
   viewer_certificate {

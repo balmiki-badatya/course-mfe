@@ -86,6 +86,10 @@ module "cloudfront" {
   depends_on                        = [module.acm]
   minimum_proctocol_version         = var.minimum_proctocol_version
   origin_path                       = var.origin_path
+  error_caching_min_ttl             = var.error_caching_min_ttl
+  error_code                        = var.error_code
+  response_code                     = var.response_code
+  response_page_path                = var.response_page_path
 }
 
 module "iam" {
