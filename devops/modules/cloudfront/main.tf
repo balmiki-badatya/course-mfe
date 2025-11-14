@@ -67,7 +67,6 @@ resource "aws_route53_record" "cf_route53_record" {
   zone_id = var.route53_zone_id
   name    = var.domain_name
   type    = var.route53_record_type
-  ttl     = var.cf_route53_record_ttl
 
   alias {
     name                   = aws_cloudfront_distribution.skillsync_distribution.domain_name

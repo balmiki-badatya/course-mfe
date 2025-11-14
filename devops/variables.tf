@@ -260,10 +260,6 @@ variable "cf_enable_evaluate_target_health" {
   description = "Cloudfront route53 record evaluation target health"
 }
 
-variable "cf_route53_record_ttl" {
-  type        = number
-  description = "Cloudformation route53 record ttl"
-}
 #####################################################################################################
 ###########################################   IAM  vars.  ###########################################
 variable "sid" {

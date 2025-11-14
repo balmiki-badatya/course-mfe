@@ -154,8 +154,3 @@ variable "enable_evaluate_target_health" {
   description = "Enable evaluate target health"
 
 }
-
-variable "cf_route53_record_ttl" {
-  type        = number
-  description = "Cloudfront route53 record ttl in seconds"
-}
