@@ -8,7 +8,7 @@ data "aws_iam_policy_document" "origin_bucket_policy" {
       identifiers = ["cloudfront.amazonaws.com"]
     }
 
-    actions = var.s3_permissions
+    actions = toset(var.s3_permissions)
 
     resources = [
       "${var.aws_s3_bucket_arn}/*",

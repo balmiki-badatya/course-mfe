@@ -94,6 +94,7 @@ module "cloudfront" {
   route53_zone_id                   = module.roue53.subdomain_details.zone_id
   route53_record_type               = var.cloudfront_route53_record_type
   enable_evaluate_target_health     = var.cf_enable_evaluate_target_health
+  cf_route53_record_ttl             = var.cf_route53_record_ttl
 }
 
 module "iam" {
