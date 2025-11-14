@@ -53,6 +53,7 @@ response_code                     = 200
 response_page_path                = "index.html"
 cloudfront_route53_record_type    = "A"
 cf_enable_evaluate_target_health  = false
+cf_route53_record_ttl             = 300
 
 ######## IAM Policy vars ############
 sid            = "AllowCloudFrontServiceReadOnlyPrincipal"
